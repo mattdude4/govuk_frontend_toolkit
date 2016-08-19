@@ -7,12 +7,15 @@
   function ShowHideContent() {
     var self = this;
 
-    // Radio and Checkbox selectors
-    var selectors = {
-      namespace: 'ShowHideContent',
-      radio: '.block-label input[type="radio"]',
-      checkbox: '.block-label input[type="checkbox"]'
-    };
+    var $els = $('.js-toggle-showhide');
+
+    if ($els.length > 0) {
+      var namespace = 'ShowHideContent';
+      var radioSelector = '.block-label input[type="radio"]';
+      var checkboxSelector = '.block-label input[type="checkbox"]';
+    } else {
+      console.log('parent class .js-toggle-showhide is missing');
+    }
 
     // Escape name attribute for use in DOM selector
     function escapeElementName(str) {
@@ -81,7 +84,7 @@
     function handleRadioContent($control, $content) {
 
       // All radios in this group
-      var selector = selectors.radio + '[name=' + escapeElementName($control.attr('name')) + ']';
+      var selector = radioSelector + '[name=' + escapeElementName($control.attr('name')) + ']';
       var $radios = $control.closest('form').find(selector);
 
       // Hide radios in group
@@ -122,7 +125,7 @@
       $controls.each(initToggledContent);
 
       // Handle events
-      $container.on('click.' + selectors.namespace, selector, deferred);
+      $container.on('click.' + namespace, selector, deferred);
 
       // Any already :checked on init?
       if ($controls.is(':checked')) {
@@ -132,18 +135,18 @@
 
     // Set up radio show/hide content for container
     self.showHideRadioToggledContent = function($container) {
-      init($container, selectors.radio, handleRadioContent);
+      init($container, radioSelector, handleRadioContent);
     };
 
     // Set up checkbox show/hide content for container
     self.showHideCheckboxToggledContent = function($container) {
-      init($container, selectors.checkbox, handleCheckboxContent);
+      init($container, checkboxSelector, handleCheckboxContent);
     };
 
     // Remove event handlers
     self.destroy = function($container) {
       $container = $container || $(document.body);
-      $container.off('.' + selectors.namespace);
+      $container.off('.' + namespace);
     };
   }
 
