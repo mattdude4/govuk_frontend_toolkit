@@ -403,6 +403,7 @@ This method will mean the `destroy` method is not available to call.
 
 Script to support show/hide content, toggled by radio buttons and checkboxes. This allows for progressive disclosure of question and answer forms based on selected values:
 
+  <div class="js-toggle-showhide">
     <label class="block-label" data-target="show-me">
       <input type="radio" name="enabled" value="yes" /> Yes
     </label>
@@ -414,6 +415,7 @@ Script to support show/hide content, toggled by radio buttons and checkboxes. Th
     <div id="show-me" class="panel js-hidden">
       <p>Show/Hide content to be toggled</p>
     </div>
+  </div>
 
 When the input's `checked` attribute is set, the show/hide content's `.js-hidden` class is removed and ARIA attributes are added to enable it. Note the sample `show-me` id attribute used to link the label to show/hide content.
 
